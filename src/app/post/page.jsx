@@ -1,4 +1,4 @@
-import BlogCard from "@/components/BlogCard";
+import BlogCard from '../../components/BlogCard'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
