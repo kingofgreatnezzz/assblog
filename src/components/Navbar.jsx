@@ -1,18 +1,48 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import {useDispatch, useSelector} from 'react-redux'
+import { checkUserStatus, loadUser, logoutUser} from "../Redux/Actions/verifyAsyncThunk";
+import { useRouter } from "next/navigation";
+
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [clicks, setClicks] = useState(false)
+  
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  //Redux tookit
+  const dispatch = useDispatch()
+  const {isAuthenticated, user} = useSelector((state) => state.auth)
+
+  const router = useRouter()
+  useEffect(() => {
+   dispatch(checkUserStatus())
+   dispatch(loadUser)
+
+  },[isAuthenticated])
+
+  const handleLogout = () => {
+    const response  = confirm("You are about to logout")
+    if(response){
+      dispatch(logoutUser())
+      router.push('/')
+    }
+   
+
+}
+
+  const first_name = user.name?.split(' ')
+
+  console.log(isAuthenticated, first_name && first_name[0])
   return (
     <nav className="relative shadow-md p-2 bg-gray-800">
       <div className="container px-6 py-4 mx-auto">
@@ -68,16 +98,32 @@ export default function Header() {
               >
                 ABOUT
               </Link>
-
-              <Link href={"/login"} className="px-3 py-2 mx-3 mt-2 font-bold md:font-normal transition-colors border  text-blue-500 border-blue-500 rounded-xl duration-300 transform lg:mt-0  hover:bg-yellow-600 hover:text-gray-200 cursor-pointer">
+              {
+                isAuthenticated ?
+                <>
+                <Link href={"/login"} className="px-3 py-2 mx-3 mt-2 font-bold md:font-normal transition-colors border  text-blue-500 border-blue-500 rounded-xl duration-300 transform lg:mt-0  hover:bg-yellow-600 hover:text-gray-200 cursor-pointer">
+                   <strong>Welcome </strong>{first_name && first_name[0]}
+                </Link>
+                <span onClick={handleLogout} className="px-3 py-2 mx-3 mt-2 font-bold md:font-normal transition-colors border  text-blue-500 border-blue-500 rounded-xl duration-300 transform lg:mt-0  hover:bg-yellow-600 hover:text-gray-200 cursor-pointer">
+                Logout
+                </span>
+                </>
+                :
+                <>
+                <Link href={"/login"} className="px-3 py-2 mx-3 mt-2 font-bold md:font-normal transition-colors border  text-blue-500 border-blue-500 rounded-xl duration-300 transform lg:mt-0  hover:bg-yellow-600 hover:text-gray-200 cursor-pointer">
                 Login
-              </Link>
-              <Link
+                </Link>
+                <Link
                 href={"/signup"}
                 className="px-3 py-2 mx-3 mt-2 font-bold md:font-normal transition-colors border border-blue-500 rounded-xl text-blue-500 duration-300 transform lg:mt-0 hover:bg-yellow-600 hover:text-gray-200"
-              >
+                >
                 SignUp
               </Link>
+                </>
+       
+                
+              }
+              
             </div>
 
             <div className="flex items-center mt-4 lg:mt-0">

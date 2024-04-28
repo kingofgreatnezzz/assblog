@@ -1,13 +1,25 @@
 "use client"; // This is a client component 👈🏽
 import React, { useEffect, useState } from 'react'
+import {useDispatch, useSelector} from 'react-redux';
 import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { Alike_Angular } from 'next/font/google';
+import { signupUser } from '../../../Redux/Actions/authAsyncThunk';
 
 
 const Page = () => {
+  
+  // Redux toolkit hooks
+  const dispatch = useDispatch()
+  const {loading, signup_success, error, isAuthenticated} = useSelector((state) => state.auth)
+
+    useEffect(() => {
+      if(isAuthenticated){
+        router.push('/')
+      }
+    },[isAuthenticated])
+
 
   const [formData, setFormData] = useState({
     name: '',
@@ -18,11 +30,9 @@ const Page = () => {
 
   const router = useRouter()
 
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [fail, setFail] = useState('')
-  const [error, setError] = useState({passwordError: '', shortPassword: '', somethinWrong: ''})
-
+  const [message, setMessage] = useState('')
+  const [errors, setErrors] = useState({passwordError: '', shortPassword: '', somethinWrong: ''})
+  
   const {name, email, password, re_password} = formData
 
   const handleChange = (event) => {
@@ -33,8 +43,6 @@ const Page = () => {
     event.preventDefault()
   
     const validationError = {}
-    try{
-
       if(password.length < 7){
         validationError.password = 'Passwords must be at least 8 characters'
       }
@@ -44,42 +52,33 @@ const Page = () => {
       }
 
       if(Object.keys(validationError).length > 0){
-        setError({...error, passwordError: validationError.password, shortPassword:validationError.tooshort})
+        setErrors({...error, passwordError: validationError.password, shortPassword:validationError.tooshort})
       }
       else{
-        setError({...error, passwordError: '', shortPassword: ''})
-      setLoading(true)
-      const config = {
-        headers : {
-            'Content-Type': 'application/json',
-        }
-        }
-      const body = JSON.stringify({name, email, password, re_password})
-
-        axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/users/`, body, config)
-        .then(res => {
-          setSuccess(true)
-          setLoading(false)
-
-        })
-        .catch(error => {
-          setFail(error.response.data.email[0])
-          setLoading(false)
-        })
+        setErrors({...error, passwordError: '', shortPassword: ''})
+        const body = JSON.stringify({name, email, password, re_password})
+        dispatch(signupUser(body))
 
       }
-    }catch(error){
-      setLoading(false)
-      setError({...error, somethinWrong: error})
-    }
   }
   
   useEffect(() => {
-    if(success){
-      router.push('/login')
+    let timer;
+    if(signup_success){
+      setMessage("Account created successfully!")
+      timer = setTimeout(() => {
+        setMessage("")
+       router.push('/login')
+      },1500)
     }
-  },[success])
+    return () => {
+      //clear
+      clearTimeout(timer);
+    }
+    
+  },[signup_success])
   
+  console.log(signup_success)
   return (
     <div className="h-screen bg-gray-800 ">
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -103,7 +102,10 @@ const Page = () => {
           </p>
 
           {
-              error.somethinWrong ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.7rem', fontWeight:'500', textAlign: 'center'}}>Sorry, somthing went wrong</p> : ''
+              errors.somethinWrong ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.9rem', fontWeight:'500', textAlign: 'center'}}>Sorry, somthing went wrong</p> : ''
+          }
+           {
+              signup_success ? <p className='text-left mt-3' style={{color: 'green', fontSize: '.9rem', fontWeight:'500'}}>{message}</p> : ''
           }
           <form onSubmit={handleSubmit}>
           <div className="w-full mt-4">
@@ -132,7 +134,7 @@ const Page = () => {
               />
             </div>
             {
-              fail ? <b style={{color: 'red', fontSize: '.7rem', fontWeight:'500'}}>{fail}</b> : ''
+              error?.email ? <p style={{color: 'red', fontSize: '.809rem', padding:'8px 8px 8px 0', fontWeight:'500', textTransform:'capitalize'}}>{error?.email} </p> : ''
             }
 
             <div className="w-full mt-4">
@@ -161,10 +163,10 @@ const Page = () => {
               />
             </div>
             {
-              error.passwordError ? <b style={{color: 'red', fontSize: '.7rem', fontWeight:'500'}}>{error.passwordError}</b> : ''
+              errors?.passwordError ? <b style={{color: 'red', fontSize: '.9rem', fontWeight:'500'}}>{errors?.passwordError}</b> : ''
             }
             <div className="flex items-center justify-between mt-4">
-              <button type='submit' className="px-6 w-full p-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button disabled={signup_success || loading && true} type='submit' className="px-6 w-full p-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                 {
                   loading ? 'creating...' : 'SignUp'
                 }

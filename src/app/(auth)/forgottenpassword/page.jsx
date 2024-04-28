@@ -89,7 +89,7 @@ export default function page() {
             />
           </div>
             {
-                error != '' ? <p style={{color: 'red', fontSize: '.650rem', padding:'.2rem', fontWeight:'500', lineHeight:'.7rem'}}>{error}</p> : ''
+                error != '' ? <p style={{color: 'red', fontSize: '.880rem', padding:'.2rem', fontWeight:'500', lineHeight:'.7rem'}}>{error}</p> : ''
             }
           <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">
             Forgot Password

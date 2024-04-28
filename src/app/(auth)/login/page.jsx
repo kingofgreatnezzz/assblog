@@ -3,62 +3,56 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import {loginUser} from '../../../Redux/Actions/authAsyncThunk'
 
 export default function page() {
 
   const [formData, setFormData] = useState({'email': '', 'password': ''})
-  const [loginSuccess, setLoginSuccess] = useState(false)
-  const [loading, setLoading] = useState(false)
   const [loginError, setLoginError ]= useState('')
-  const [token, setToken] = useState([])
+  const [message, setMessage] = useState([])
+  const router  = useRouter();
 
+  //// Redux Hooks
+  const dispatch = useDispatch()
+  const {loading, login_success, isAuthenticated, error } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if(isAuthenticated){
+      router.push('/')
+    }
+  },[isAuthenticated])
 
   const handleChange = (event) => {
     setFormData({...formData, [event.target.name]: event.target.value})
   }
 
   const {email, password} = formData
-
-  const router  = useRouter();
-
+  
   const handleSubmit = (event) => {
     event.preventDefault()
-  try{
-      const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      };
-      const body = JSON.stringify({email, password});
-
-      setLoading(true)
-
-      axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/jwt/create/`, body, config) 
-      .then(res => {
-        setLoginSuccess(true)
-        setLoading(false)
-        setToken(res.data.access)
-        localStorage.setItem('token', res.data.access)
-        localStorage.setItem('refresh', res.data.refresh)
-        setLoginError('')
-      })
-      .catch(error => {
-        setLoginError(error.response)
-        setLoading(false)
-      })
-  
-  }catch(error){
-    setLoading(false)
+    const body = JSON.stringify({email, password})
+    dispatch(loginUser(body))
   }
-  }
+
   useEffect(() => {
-    if(token.length > 100){
-      router.push('/')
+    let timer;
+    if(login_success){
+      setMessage("Credential test passed!")
+      timer = setTimeout(() => {
+        setMessage("")
+        router.push('/')
+      }, 1500)
     }
-  },[token])
-
+    return () => {
+      //clear
+      clearTimeout(timer);
+    }
+  },[login_success])
+  
+  
+  // console.log('what is wrong ', login_success)
   
   return (
     <div className="h-screen bg-gray-800">
@@ -82,7 +76,10 @@ export default function page() {
             Login or create account
           </p>
           {
-              loginError?.data?.detail == 'No active account found with the given credentials'? <b style={{color: 'red', fontSize: '.8rem', fontWeight:'500'}}>Invalid email or password</b> : ''
+              login_success ? <p style={{color: 'green', fontSize: '.9rem', fontWeight:'500', margin:'0'}}>{message}</p> : ''
+          }
+          {
+              error?.detail == "No active account found with the given credentials" ? <p style={{color: 'red', fontSize: '.9rem', fontWeight:'500', margin:'0'}}>Invalid email or password</p> : ''
           }
           <form onSubmit={handleSubmit}>
             <div className="w-full mt-4">
@@ -119,7 +116,7 @@ export default function page() {
                 Forget Password?
               </Link>
 
-              <button type="submit" className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button disabled={login_success || loading && true} type="submit" className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                 {loading ? 'checking...' : 'Login'}
               </button>
             </div>

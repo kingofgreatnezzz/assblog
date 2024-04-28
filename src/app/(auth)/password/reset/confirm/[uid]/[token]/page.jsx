@@ -115,15 +115,15 @@ const Page = () => {
           </p>
 
           {
-              error.somethinWrong ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.7rem', fontWeight:'500', textAlign: 'center'}}>Sorry, somthing went wrong</p> : ''
+              error.somethinWrong ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.9rem', fontWeight:'500', textAlign: 'center'}}>Sorry, somthing went wrong</p> : ''
           }
 
             {
-              success ? <b style={{color: `${success ? 'green': 'red'}`, fontSize: '.650rem', fontWeight:'500'}}>{message}</b> : ''
+              success ? <b style={{color: `${success ? 'green': 'red'}`, fontSize: '.880rem', fontWeight:'500'}}>{message}</b> : ''
           }
 
             {
-              fail != '' ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.7rem', fontWeight:'500', textAlign: 'center'}}>Invalid or expired token</p> : ''
+              fail != '' ? <p className='text-center mt-3' style={{color: 'red', fontSize: '.9rem', fontWeight:'500', textAlign: 'center'}}>Invalid or expired token</p> : ''
           }
           <form onSubmit={handleSubmit}>
 
