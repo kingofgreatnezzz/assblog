@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     loading: false,
-    token: localStorage.getItem('token'),
+    token: typeof window != 'undefined' && localStorage?.getItem('token'),  
     signup_success: false,
     login_success: false,
     logout_success: false,
@@ -28,7 +28,7 @@ const authSlice = createSlice({
         },
 
         loginSuccess(state, action){
-            localStorage.setItem('token', action.payload.access)
+            typeof window != 'undefined' && localStorage?.setItem('token', action.payload.access)
             return{
             ...state,
             login_success : true,
@@ -40,7 +40,7 @@ const authSlice = createSlice({
         },
 
         loginFailure(state, action){
-            sessionStorage.removeItem('token')
+            typeof window != 'undefined' && sessionStorage?.removeItem('token')
             return{
             ...state,
             loading : false,
@@ -109,7 +109,9 @@ const authSlice = createSlice({
         },
         
         logoutUserSuccess(state){
-            localStorage.removeItem('token')
+            // if (typeof window !== 'undefined') {
+            //     // Perform localStorage action
+           typeof window != 'undefined' && localStorage?.removeItem('token')
             return{
                 ...state,
                 user: [],
@@ -120,7 +122,6 @@ const authSlice = createSlice({
         },
 
         logoutUserFailure(state){
-            console.log("Something happend here")
             return{
                 ...state,
                 logout_success: false,

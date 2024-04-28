@@ -12,7 +12,7 @@ export const loadUser = createAsyncThunk(
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `JWT ${localStorage.getItem('token')}`,
+                    'Authorization': `JWT ${typeof window != 'undefined' && localStorage.getItem('token')}`,
                     'Accept': 'application/json',
                 }
             }
@@ -41,7 +41,7 @@ export const checkUserStatus = createAsyncThunk(
                 }
                  }
         try{
-            const body = JSON.stringify({token: localStorage.getItem('token')});
+            const body = JSON.stringify({token: typeof window != 'undefined' && localStorage.getItem('token')});
             const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/jwt/verify/`, body, config)
             dispatch(checkStatusSuccess())
             dispatch(loadUser())
@@ -62,7 +62,7 @@ export const logoutUser = createAsyncThunk(
 
         const dispatch = thunkAPI.dispatch;
 
-        if(localStorage.getItem('token')){
+        if(typeof window != 'undefined' && localStorage.getItem('token')){
 
             const config = {
                 headers: {
@@ -72,7 +72,7 @@ export const logoutUser = createAsyncThunk(
             }
 
         try{
-            const body = JSON.stringify({token: localStorage.getItem('token')});
+            const body = JSON.stringify({token: typeof window != 'undefined' && localStorage.getItem('token')});
             const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/jwt/verify/`, body, config)
             dispatch(logoutUserSuccess())
             return res.data
