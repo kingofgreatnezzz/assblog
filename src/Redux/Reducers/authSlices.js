@@ -62,7 +62,7 @@ const authSlice = createSlice({
         signupSuccess(state){
             return{
                 ...state,
-                signupSuccess: true,
+                signup_success: true,
                 loading: false,
                 isAuthenticated: false,
             }
