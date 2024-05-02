@@ -31,13 +31,12 @@ export default function Features() {
               </svg>
 
               <h1 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
-                Default Taiwindcss Config
+                Myth of Identity in Fashion
               </h1>
 
               <p class="mt-2 text-gray-500 dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida
-                sem feugiat.
+              Beyond its aesthetic appeal, fashion plays a significant role in shaping social norms,
+               challenging conventions, and sparking important conversations. It has the power to challenge stereotypes.
               </p>
             </div>
 
@@ -58,13 +57,13 @@ export default function Features() {
               </svg>
 
               <h1 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
-                Fully Responsive Components
+                Unit of the universe
               </h1>
 
               <p class="mt-2 text-gray-500 dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida
-                sem feugiat.
+              
+              As a result, fashion becomes a reflection of the zeitgeist, capturing 
+              the spirit of the times and reflecting society's evolving values, aspirations, and concerns.
               </p>
             </div>
 
@@ -100,13 +99,11 @@ export default function Features() {
               </svg>
 
               <h1 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">
-                RTL Languages Support
+                Culture and Values
               </h1>
 
               <p class="mt-2 text-gray-500 dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Dignissim fusce tortor, ac sed malesuada blandit. Et mi gravida
-                sem feugiat.
+              Fashion trends are often influenced by a myriad of factors, including art, music, film, politics, and technology
               </p>
             </div>
           </div>

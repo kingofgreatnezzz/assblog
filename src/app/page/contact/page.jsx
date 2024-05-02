@@ -44,7 +44,7 @@ export default function page() {
                 Our friendly team is here to help.
               </p>
               <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
-                hello@merakiui.com
+              franklylifestyle@gmail.com
               </p>
             </div>
 
@@ -141,7 +141,7 @@ export default function page() {
                 Mon-Fri from 8am to 5pm.
               </p>
               <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
-                +1 (555) 000-0000
+              + (234) 700 1000 503
               </p>
             </div>
           </div>

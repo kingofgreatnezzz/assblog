@@ -9,9 +9,8 @@ export default function page() {
             Franky Lifestyle Ensure a better lifestlye with fashion.
           </h1>
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-            Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-            taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi
-            pug.
+           Legends say fashion is a blueprint of identity and culture we all stand for something and 
+           believe in it. Here frankly fashion knows no boundaries.
           </p>
         </div>
         <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
@@ -30,7 +29,7 @@ export default function page() {
                 <path d="M22 4L12 14.01l-3-3"></path>
               </svg>
               <span className="title-font font-medium">
-                Authentic Cliche Forage
+                Bullard Frankly
               </span>
             </div>
           </div>
@@ -49,7 +48,7 @@ export default function page() {
                 <path d="M22 4L12 14.01l-3-3"></path>
               </svg>
               <span className="title-font font-medium">
-                Kinfolk Chips Snackwave
+              Frankly
               </span>
             </div>
           </div>
