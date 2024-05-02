@@ -13,17 +13,16 @@ export default function Footer() {
             </a>
 
             <div class="flex flex-wrap justify-center mt-6 -mx-4">
-              <a
-                href="#"
+              <Link href={"/"}
                 class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
                 
                 Home
-              </a>
+              </Link>
 
               <Link
-                href={"/pages/contaact"}
+                href={"/page/about"}
                 class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
@@ -31,7 +30,7 @@ export default function Footer() {
               </Link>
 
               <Link
-                href={"/pages/contaact"}
+                href={"/page/contact"}
                 class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
                 aria-label="Reddit"
               >
@@ -40,7 +39,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
+          <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700"/>
 
           <div class="flex flex-col items-center sm:flex-row sm:justify-between">
             <p class="text-sm text-gray-500 dark:text-gray-300">

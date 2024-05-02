@@ -139,7 +139,7 @@ export default function Header() {
                 className="flex items-center focus:outline-none"
                 aria-label="toggle profile dropdown"
               >
-                <h3 className="mx-2 text-gray-500 lg:hidden">Khatab wedaa</h3>
+                <h3 className="mx-2 text-gray-500 lg:hidden">Frankly</h3>
               </button>
             </div>
           </div>

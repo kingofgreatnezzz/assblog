@@ -12,7 +12,7 @@ export default function BlogCard() {
               width={500}
               height={500}
               class="object-cover object-center w-full h-64 rounded-lg lg:h-80"
-              src={"/blog1.jpg"}
+              src={"/sunglass.jpg"}
               alt="all"
             />
 
@@ -21,7 +21,7 @@ export default function BlogCard() {
                 width={500}
                 height={500}
                 class="object-cover object-center w-10 h-10 rounded-full"
-                src={"/blog1.jpg"}
+                src={"/sunglass.jpg"}
                 alt="all"
               />
 
@@ -43,8 +43,8 @@ export default function BlogCard() {
           <hr class="w-32 my-6 text-blue-500" />
 
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-            fugit dolorum amet dolores praesentium, alias nam? Tempore
+          At its core, fashion serves as a form of self-expression, allowing individuals to convey their identity, personality,
+           and mood through the clothes they wear. Whether it's a bold statement piece, a timeless classic, or an avant-garde ensemble.
           </p>
 
           <Link
@@ -78,22 +78,22 @@ export default function BlogCard() {
                 <h1 class="text-sm text-gray-700 dark:text-gray-200">
                   Bella Imal
                 </h1>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  CEO 
-                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">CEO</p>
               </div>
             </div>
           </div>
 
           <h1 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">
-            What do you want to know about UI
+            diversity of Unique Lifestyle
           </h1>
 
           <hr class="w-32 my-6 text-blue-500" />
 
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-            fugit dolorum amet dolores praesentium, alias nam? Tempore
+            Fashion is more than just clothing; it's a reflection of cultural
+            influences, societal trends, and personal expression. From haute
+            couture runways to everyday street style, fashion encompasses a vast
+            spectrum of styles, aesthetics, and interpretations.
           </p>
 
           <Link
@@ -135,14 +135,15 @@ export default function BlogCard() {
           </div>
 
           <h1 class="mt-6 text-xl font-semibold text-gray-800 dark:text-white">
-            What do you want to know about UI
+            Personality of Fashion
           </h1>
 
           <hr class="w-32 my-6 text-blue-500" />
 
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-            fugit dolorum amet dolores praesentium, alias nam? Tempore
+          fashion empowers individuals to showcase their creativity and individuality. 
+          It transcends age, gender, and cultural boundaries, offering a universal language 
+          through which people can connect and communicate.
           </p>
 
           <Link
